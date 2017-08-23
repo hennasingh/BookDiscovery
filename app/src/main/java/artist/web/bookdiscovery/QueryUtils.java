@@ -2,9 +2,11 @@ package artist.web.bookdiscovery;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +24,9 @@ import java.util.List;
 
 public final class QueryUtils {
 
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
     /**
@@ -38,11 +42,11 @@ public final class QueryUtils {
      */
     public static List<Book> fetchBookData(String requestUrl) {
 
-         try {
-         Thread.sleep(2000);
-         } catch (InterruptedException e) {
-         e.printStackTrace();
-         }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Create URL object
         URL url = createUrl(requestUrl);
@@ -92,15 +96,15 @@ public final class QueryUtils {
 
             //If the request was successful (response code 200),
             //then read the input stream and parse the response.
-            if(urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }else{
-                Log.e(LOG_TAG,"Error response code: " + urlConnection.getResponseCode());
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
 
-            Log.e(LOG_TAG,"There is an error in making a connection",e);
+            Log.e(LOG_TAG, "There is an error in making a connection", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -143,7 +147,7 @@ public final class QueryUtils {
         /** Create an empty ArrayList used to add books */
         List<Book> books = new ArrayList<>();
 
-        try{
+        try {
             JSONObject baseJsonResponse;    // JSON Object for the data retrieved from API request
             JSONArray bookArray;            // Array of books returned in the JSON object
             JSONObject currentBook;         // Single book at a specific position in the bookArray
@@ -161,26 +165,26 @@ public final class QueryUtils {
 
             bookArray = baseJsonResponse.optJSONArray("items");
 
-            for(int i=0; i<bookArray.length();i++){
+            for (int i = 0; bookArray != null && i < bookArray.length(); i++) {
                 currentBook = bookArray.getJSONObject(i);
                 volumeInfo = currentBook.getJSONObject("volumeInfo");
                 title = volumeInfo.getString("title");
 
                 //book authors list
 
-                    if(volumeInfo.has("authors")) {
-                        authorsArray = volumeInfo.getJSONArray("authors");
-                        if (authorsArray.length() > 1) {
-                            authorList = authorsArray.join(", ").replaceAll("\"", "");
-                        } else if (authorsArray.length() == 1) {
-                            authorList = authorsArray.getString(0);
-                        } else if (authorsArray.length() == 0) {
-                            authorList = "";
-                        }
-                    }else
-                        authorList="";
+                if (volumeInfo.has("authors")) {
+                    authorsArray = volumeInfo.getJSONArray("authors");
+                    if (authorsArray.length() > 1) {
+                        authorList = authorsArray.join(", ").replaceAll("\"", "");
+                    } else if (authorsArray.length() == 1) {
+                        authorList = authorsArray.getString(0);
+                    } else if (authorsArray.length() == 0) {
+                        authorList = "";
+                    }
+                } else
+                    authorList = "";
 
-                 //book image links
+                //book image links
                 imageLinks = volumeInfo.optJSONObject("imageLinks");
                 if (imageLinks.has("smallThumbnail")) {
                     thumbnailLink = imageLinks.getString("smallThumbnail");
@@ -197,12 +201,12 @@ public final class QueryUtils {
 
                 // Get value for publisher if the key exists
                 if (volumeInfo.has("publisher")) {
-                    bookPublisher= volumeInfo.getString("publisher");
+                    bookPublisher = volumeInfo.getString("publisher");
                 } else {
                     bookPublisher = "";
                 }
 
-                 // book info link
+                // book info link
                 if (volumeInfo.has("infoLink")) {
                     infoLink = volumeInfo.getString("infoLink");
                 } else {
@@ -223,7 +227,7 @@ public final class QueryUtils {
                 books.add(book);
             }
 
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e(LOG_TAG, "There is an error retrieving Json Results", e);
         }
 
@@ -231,10 +235,6 @@ public final class QueryUtils {
         return books;
 
     }
-
-
-
-
 
 
 }

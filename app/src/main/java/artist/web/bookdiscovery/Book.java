@@ -14,13 +14,13 @@ public class Book {
     private String infoUrl;
 
 
-    public Book(String title, String author, String bookPublisher, String bookPublishedDate,String infoUrl,
+    public Book(String title, String author, String bookPublisher, String bookPublishedDate, String infoUrl,
                 String imageThumbnail) {
         this.title = title;
         this.author = author;
         this.imageThumbnail = imageThumbnail;
         this.bookPublisher = bookPublisher;
-        this.bookPublishedDate= bookPublishedDate;
+        this.bookPublishedDate = bookPublishedDate;
         this.infoUrl = infoUrl;
     }
 

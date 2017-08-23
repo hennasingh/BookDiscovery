@@ -11,16 +11,19 @@ import java.util.List;
 
 public class BookLoader extends AsyncTaskLoader<List<Book>> {
 
-    /** Tag for log messages */
+    /**
+     * Tag for log messages
+     */
     private static final String LOG_TAG = BookLoader.class.getName();
     private String book_url;
 
     /**
      * Constructs a new {@link BookLoader} object
+     *
      * @param context
      * @param url
      */
-    public BookLoader (Context context, String url) {
+    public BookLoader(Context context, String url) {
         super(context);
         book_url = url;
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,12 +10,12 @@
         android:id="@+id/book_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/heading_marginT"
-        android:textSize="@dimen/heading_text_size"
-        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="@string/book_heading"
         android:textColor="@color/book_heading"
-        android:text="@string/book_heading" />
+        android:textSize="@dimen/heading_text_size"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/enter_name"
@@ -24,36 +23,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/book_heading"
         android:layout_marginTop="120dp"
-        android:text="@string/enter_book_name"
         android:gravity="center"
-        android:textSize="@dimen/enter_text_size"
-        android:textColor="@color/enter_name"/>
+        android:text="@string/enter_book_name"
+        android:textColor="@color/enter_name"
+        android:textSize="@dimen/enter_text_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_name"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/linear_marginT">
+        android:layout_marginTop="@dimen/linear_marginT"
+        android:orientation="horizontal">
 
-     <EditText
-        android:id="@+id/book_title"
-        android:layout_width="0dp"
-         android:layout_weight="4"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/edit_marginL"
-        android:layout_marginRight="@dimen/edit_marginR"
-         android:hint="@string/enter_book_title"/>
+        <EditText
+            android:id="@+id/book_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/edit_marginL"
+            android:layout_marginRight="@dimen/edit_marginR"
+            android:layout_weight="4"
+            android:hint="@string/enter_book_title" />
 
-    <Button
-        android:id="@+id/button_search"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/search_marginR"
-        android:layout_alignEnd="@id/book_title"
-        android:background="@drawable/search_icon"/>
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/book_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/search_marginR"
+            android:layout_weight="1"
+            android:background="@drawable/search_icon" />
 
     </LinearLayout>
 

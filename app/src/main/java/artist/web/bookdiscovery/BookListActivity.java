@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +25,21 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
 
     public static final String LOG_TAG = BookListActivity.class.getName();
 
-    /** Constant value for the BookLoader ID */
+    /**
+     * Constant value for the BookLoader ID
+     */
     private static final int BOOK_LOADER_ID = 1;
 
-    /** Google API URL */
+    /**
+     * Google API URL
+     */
     private static final String BOOKS_REQUEST_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
     private static final int NUM_RESULTS_DEFAULT = 10;
-
+    public static List<Book> booksList;
     private static String bookSearched;
     private BookAdapter book_adapter;
     private TextView emptyState;
-    public static List<Book> booksList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,12 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
         // Find a reference to the {@link ListView} in the layout
         ListView bookListView = (ListView) findViewById(R.id.list_books);
 
-        emptyState = (TextView)findViewById(R.id.text_empty_list);
+        emptyState = (TextView) findViewById(R.id.text_empty_list);
         bookListView.setEmptyView(emptyState);
 
         // Create a new adapter that takes the list of books as input
         booksList = new ArrayList<Book>();
-        book_adapter = new BookAdapter(this,booksList);
+        book_adapter = new BookAdapter(this, booksList);
 
         // Create a new adapter that takes the list of books as input
         bookListView.setAdapter(book_adapter);
@@ -107,7 +111,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
         Uri baseUri = Uri.parse(prepareSearchQuery());
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-      return new BookLoader(this, uriBuilder.toString());
+        return new BookLoader(this, uriBuilder.toString());
     }
 
     @Override
@@ -132,6 +136,7 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
 
     /**
      * This method prepares the final query used to fetch data from Google API
+     *
      * @return search query
      */
     public String prepareSearchQuery() {
@@ -139,14 +144,13 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
         StringBuilder stringBuilder = new StringBuilder(BOOKS_REQUEST_BASE_URL);
         stringBuilder.append("+intitle:").append(bookSearched).append("&").append("maxResults=").append(NUM_RESULTS_DEFAULT);
 
-        return(stringBuilder.toString());
+        return (stringBuilder.toString());
     }
 
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
         book_adapter.clear();
     }
-
 
 
 }

@@ -7,10 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonSearch;
-    private EditText editBookTitle;
+    @BindView(R.id.button_search)
+    Button buttonSearch;
+    @BindView(R.id.book_title)
+    EditText editBookTitle;
 
     private String book_title;
 
@@ -19,8 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonSearch = (Button) findViewById(R.id.button_search);
-        editBookTitle = (EditText) findViewById(R.id.book_title);
+        ButterKnife.bind(this);
         buttonSearch.setOnClickListener(this);
     }
 
