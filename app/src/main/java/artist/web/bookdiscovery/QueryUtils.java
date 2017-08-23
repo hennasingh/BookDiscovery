@@ -167,8 +167,10 @@ public final class QueryUtils {
 
             for (int i = 0; bookArray != null && i < bookArray.length(); i++) {
                 currentBook = bookArray.getJSONObject(i);
-                volumeInfo = currentBook.getJSONObject("volumeInfo");
-                title = volumeInfo.getString("title");
+
+                    volumeInfo = currentBook.getJSONObject("volumeInfo");
+                    title = volumeInfo.getString("title");
+
 
                 //book authors list
 
@@ -185,11 +187,13 @@ public final class QueryUtils {
                     authorList = "";
 
                 //book image links
-                imageLinks = volumeInfo.optJSONObject("imageLinks");
-                if (imageLinks.has("smallThumbnail")) {
-                    thumbnailLink = imageLinks.getString("smallThumbnail");
-                } else {
-                    thumbnailLink = "";
+                if(volumeInfo.has("imageLinks")) {
+                    imageLinks = volumeInfo.getJSONObject("imageLinks");
+                    if (imageLinks.has("smallThumbnail")) {
+                        thumbnailLink = imageLinks.getString("smallThumbnail");
+                    } else {
+                        thumbnailLink = "";
+                    }
                 }
 
                 // Get value for publishedDate if the key exists

@@ -12,4 +12,5 @@
     <string name="placeholder_author">Book Author is Big Nerd Ranch</string>
     <string name="placeholder_publisher">Published by Blah and Blah</string>
     <string name="published_date">published on 21 Aug 2015</string>
+    <string name="no_browser_msg">You dont have a browser installed to open the link</string>
 </resources>

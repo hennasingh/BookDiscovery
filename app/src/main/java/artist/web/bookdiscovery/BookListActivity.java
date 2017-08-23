@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,13 @@ public class BookListActivity extends AppCompatActivity implements LoaderCallbac
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, bookUri);
 
                 // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+                if (websiteIntent.resolveActivity(getPackageManager()) != null) {
+
+                    startActivity(websiteIntent);
+
+                }else
+                    Toast.makeText(getApplicationContext(), R.string.no_browser_msg,Toast.LENGTH_LONG).show();
+
             }
         });
     }
