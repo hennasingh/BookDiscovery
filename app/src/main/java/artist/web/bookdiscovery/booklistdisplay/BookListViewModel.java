@@ -22,17 +22,21 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery.model;
+package artist.web.bookdiscovery.booklistdisplay;
 
-import com.google.gson.annotations.SerializedName;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
+import android.arch.paging.PagedList;
 
-public class Epub {
+import java.util.concurrent.Executor;
 
-    @SerializedName("isAvailable")
-    private Boolean isAvailable;
+import artist.web.bookdiscovery.model.VolumeInfo;
+import artist.web.bookdiscovery.network.NetworkState;
 
-    @SerializedName("downloadLink")
-    private String downloadLink;
+public class BookListViewModel extends ViewModel {
 
+    private Executor mExecutorThread;
+    private LiveData<NetworkState> mNetworkStateLiveData;
+    private LiveData<PagedList<VolumeInfo>> mPagedListBookLiveData;
 
 }

@@ -1,49 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) 2018 Henna Singh
+  ~
+  ~ MIT License
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBG"
-    android:orientation="horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBG">
 
     <ImageView
         android:id="@+id/image_book"
-        android:layout_width="@dimen/dimen_200dp"
-        android:layout_height="@dimen/dimen_120dp"
-        android:layout_weight="2"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
         android:adjustViewBounds="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:contentDescription="@string/image_contentD"
         android:scaleType="centerCrop"
-        tools:background="@drawable/image_not_found" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/book_author"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/image_not_found"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_120dp"
-        android:layout_weight="4"
-        android:padding="@dimen/padding_6dp">
+    <RatingBar
+        android:id="@+id/rating"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/image_book"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/book_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:layout_marginTop="@dimen/dimen_5dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/purple"
-            android:textSize="@dimen/text_14sp"
-            tools:text="@string/placeholder_title" />
+
+    <TextView
+        android:id="@+id/book_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_book"
+        android:textColor="@color/purple"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintTop_toBottomOf="@id/rating"
+        tools:text="@string/placeholder_title" />
 
         <TextView
             android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/book_title"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:textColor="@color/red"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_book"
+            app:layout_constraintTop_toBottomOf="@id/book_title"
             android:textSize="@dimen/text_14sp"
             tools:text="@string/placeholder_author" />
 
@@ -51,9 +83,10 @@
             android:id="@+id/book_publisher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/book_author"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_book"
+            app:layout_constraintTop_toBottomOf="@id/book_author"
             android:textColor="@color/orange"
             android:textSize="@dimen/text_12sp"
             tools:text="@string/placeholder_publisher" />
@@ -62,12 +95,12 @@
             android:id="@+id/book_publishedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/book_publisher"
-            android:layout_marginLeft="@dimen/dimen_5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_book"
             android:textColor="@color/orange"
+            app:layout_constraintTop_toBottomOf="@id/book_publisher"
             android:textSize="@dimen/text_12sp"
             tools:text="@string/published_date" />
 
-    </RelativeLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

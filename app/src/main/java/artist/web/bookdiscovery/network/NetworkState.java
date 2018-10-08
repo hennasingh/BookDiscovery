@@ -22,17 +22,31 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery.model;
+package artist.web.bookdiscovery.network;
 
-import com.google.gson.annotations.SerializedName;
+public class NetworkState {
 
-public class Epub {
+    public static final NetworkState LOADED = new NetworkState(Status.SUCCESS, "Success");
+    public static final NetworkState LOADING = new NetworkState(Status.RUNNING, "Running");
+    private final Status status;
+    private final String msg;
 
-    @SerializedName("isAvailable")
-    private Boolean isAvailable;
+    public NetworkState(Status status, String msg) {
+        this.status = status;
+        this.msg = msg;
+    }
 
-    @SerializedName("downloadLink")
-    private String downloadLink;
+    public Status getStatus() {
+        return status;
+    }
 
+    public String getMsg() {
+        return msg;
+    }
 
+    public enum Status {
+        RUNNING,
+        SUCCESS,
+        FAILED
+    }
 }

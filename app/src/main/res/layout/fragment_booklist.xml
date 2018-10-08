@@ -23,17 +23,8 @@
   ~ SOFTWARE.
   -->
 
-<resources>
-    <color name="colorPrimary">#00897B</color>
-    <color name="colorPrimaryDark">#004D40</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="enter_name">#009688</color>
-    <color name="book_heading">#00897B</color>
-    <color name="colorError">#FF9B82</color>
-    <color name="book_activity_bg">#80CBC4</color>
-    <color name="colorText">#3F1106</color>
-    <color name="orange">#FF9800</color>
-    <color name="purple">#6A1B9A</color>
-    <color name="red">#C2185B</color>
-    <color name="colorBG">#B2DFDB</color>
-</resources>
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recycler_view_booklist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>

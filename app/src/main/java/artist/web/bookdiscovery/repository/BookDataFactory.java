@@ -22,17 +22,25 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery.model;
+package artist.web.bookdiscovery.repository;
 
-import com.google.gson.annotations.SerializedName;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.paging.DataSource;
 
-public class Epub {
+import artist.web.bookdiscovery.model.BookItem;
 
-    @SerializedName("isAvailable")
-    private Boolean isAvailable;
+public class BookDataFactory extends DataSource.Factory<Integer, BookItem> {
 
-    @SerializedName("downloadLink")
-    private String downloadLink;
+    private MutableLiveData<BookDataSource> mBookDataSourceMutableLiveData = new MutableLiveData<>();
 
+    @Override
+    public DataSource<Integer, BookItem> create() {
+        BookDataSource mBookDataSource = new BookDataSource();
+        mBookDataSourceMutableLiveData.postValue(mBookDataSource);
+        return mBookDataSource;
+    }
 
+    public MutableLiveData<BookDataSource> getBookDataSourceMutableLiveData() {
+        return mBookDataSourceMutableLiveData;
+    }
 }
