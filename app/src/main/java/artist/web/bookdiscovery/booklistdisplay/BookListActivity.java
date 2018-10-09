@@ -24,62 +24,64 @@
 
 package artist.web.bookdiscovery.booklistdisplay;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.arch.paging.PagedList;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.List;
-
-import artist.web.bookdiscovery.Book;
-import artist.web.bookdiscovery.BookAdapter;
+import artist.web.bookdiscovery.booklistdisplay.adapter.BookAdapter;
 import artist.web.bookdiscovery.R;
+import artist.web.bookdiscovery.SingleFragmentActivity;
+import artist.web.bookdiscovery.model.BookItem;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by User on 7/10/2017.
  */
 
-public class BookListActivity extends AppCompatActivity {
+public class BookListActivity extends SingleFragmentActivity {
 
     public static final String LOG_TAG = BookListActivity.class.getName();
 
-    /**
-     * Constant value for the BookLoader ID
-     */
-    private static final int BOOK_LOADER_ID = 1;
+    private static String mBookSearched;
+    @BindView(R.id.recycler_view_booklist)
+    RecyclerView mRecyclerView;
+    private BookAdapter mBookAdapter;
+    private BookListViewModel mBookListViewModel;
 
-    /**
-     * Google API URL
-     */
-    private static final String BOOKS_REQUEST_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
-
-    private static final int NUM_RESULTS_DEFAULT = 10;
-    public static List<Book> booksList;
-    private static String bookSearched;
-    private BookAdapter book_adapter;
     private TextView emptyState;
+
+    @Override
+    protected Fragment createFragment() {
+        return BookListFragment.newInstance();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_books_list);
 
+        ButterKnife.bind(this);
+        mBookListViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
+
         // Get Intent Extras
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
-            bookSearched = bundle.getString("bookTitle");
+            mBookSearched = bundle.getString("bookTitle");
 
         }
 
-        // Find a reference to the {@link ListView} in the layout
-        ListView bookListView = (ListView) findViewById(R.id.list_books);
-
-        emptyState = (TextView) findViewById(R.id.text_empty_list);
-        bookListView.setEmptyView(emptyState);
+        setUpUI();
 
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
@@ -100,6 +102,22 @@ public class BookListActivity extends AppCompatActivity {
             emptyState.setText(R.string.error_no_connection);
         }
 
+    }
+
+    private void setUpUI() {
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mBookAdapter = new BookAdapter();
+
+        mBookListViewModel.getPagedListBookLiveData().observe(this, new Observer<PagedList<BookItem>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<BookItem> bookItems) {
+                if (bookItems != null) {
+                    mBookAdapter.submitList(bookItems);
+                }
+            }
+        });
+        mRecyclerView.setAdapter(mBookAdapter);
     }
 
     /**

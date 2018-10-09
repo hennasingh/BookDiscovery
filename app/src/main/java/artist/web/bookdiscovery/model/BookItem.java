@@ -51,4 +51,59 @@ public class BookItem {
     private SearchInfo mSearchInfo;
 
 
+    public String getId() {
+        return mId;
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getEtag() {
+        return mEtag;
+    }
+
+    public void setEtag(String etag) {
+        mEtag = etag;
+    }
+
+    public String getWebLink() {
+        return mWebLink;
+    }
+
+    public void setWebLink(String webLink) {
+        mWebLink = webLink;
+    }
+
+    public VolumeInfo getVolumeInfo() {
+        return mVolumeInfo;
+    }
+
+    public void setVolumeInfo(VolumeInfo volumeInfo) {
+        mVolumeInfo = volumeInfo;
+    }
+
+    public SaleInfo getSaleInfo() {
+        return mSaleInfo;
+    }
+
+    public void setSaleInfo(SaleInfo saleInfo) {
+        mSaleInfo = saleInfo;
+    }
+
+    public AccessInfo getAccessInfo() {
+        return mAccessInfo;
+    }
+
+    public void setAccessInfo(AccessInfo accessInfo) {
+        mAccessInfo = accessInfo;
+    }
+
+    public SearchInfo getSearchInfo() {
+        return mSearchInfo;
+    }
+
+    public void setSearchInfo(SearchInfo searchInfo) {
+        mSearchInfo = searchInfo;
+    }
 }

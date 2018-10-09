@@ -25,18 +25,51 @@
 package artist.web.bookdiscovery.booklistdisplay;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
+import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
 import java.util.concurrent.Executor;
 
-import artist.web.bookdiscovery.model.VolumeInfo;
+import artist.web.bookdiscovery.model.BookItem;
 import artist.web.bookdiscovery.network.NetworkState;
+import artist.web.bookdiscovery.repository.BookDataFactory;
+import artist.web.bookdiscovery.repository.BookDataSource;
 
 public class BookListViewModel extends ViewModel {
 
     private Executor mExecutorThread;
-    private LiveData<NetworkState> mNetworkStateLiveData;
-    private LiveData<PagedList<VolumeInfo>> mPagedListBookLiveData;
+    private BookDataFactory mBookDataFactory;
 
+    private LiveData<NetworkState> mNetworkStateLiveData;
+    private LiveData<PagedList<BookItem>> mPagedListBookLiveData;
+
+    public BookListViewModel() {
+        mBookDataFactory = new BookDataFactory();
+        initializePaging();
+    }
+
+    private void initializePaging() {
+        PagedList.Config pagedListConfig =
+                new PagedList.Config.Builder()
+                        .setEnablePlaceholders(true)
+                        .setInitialLoadSizeHint(10)
+                        .setPageSize(10)
+                        .build();
+
+        mPagedListBookLiveData = new LivePagedListBuilder<>(mBookDataFactory, pagedListConfig).build();
+        mNetworkStateLiveData = Transformations.switchMap(mBookDataFactory.getBookDataSourceMutableLiveData(),
+                BookDataSource::getNetworkState);
+
+
+    }
+
+    public LiveData<NetworkState> getNetworkState() {
+        return mNetworkStateLiveData;
+    }
+
+    public LiveData<PagedList<BookItem>> getPagedListBookLiveData() {
+        return mPagedListBookLiveData;
+    }
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery;
+package artist.web.bookdiscovery.launchdisplay;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,11 +31,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.booklistdisplay.BookListActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.button_search)
     Button buttonSearch;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_launch);
 
         ButterKnife.bind(this);
         buttonSearch.setOnClickListener(this);

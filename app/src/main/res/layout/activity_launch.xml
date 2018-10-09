@@ -24,11 +24,10 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/pile_books"
-    tools:context="artist.web.bookdiscovery.MainActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pile_books">
 
     <TextView
         android:id="@+id/book_heading"
@@ -62,9 +61,10 @@
         <EditText
             android:id="@+id/book_title"
             android:layout_width="0dp"
+            android:layout_marginEnd="@dimen/edit_marginR"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/edit_marginL"
-            android:layout_marginRight="@dimen/edit_marginR"
+            android:layout_marginStart="@dimen/edit_marginL"
+            android:inputType="text"
             android:layout_weight="4"
             android:hint="@string/enter_book_title" />
 
@@ -72,9 +72,7 @@
             android:id="@+id/button_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/book_title"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="@dimen/search_marginR"
+            android:layout_marginEnd="@dimen/search_marginR"
             android:layout_weight="1"
             android:background="@drawable/search_icon" />
 

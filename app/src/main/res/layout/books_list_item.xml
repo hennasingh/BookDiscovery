@@ -22,10 +22,11 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   ~ SOFTWARE.
   -->
-
-<android.support.constraint.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<android.support.constraint.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -104,3 +105,4 @@
             tools:text="@string/published_date" />
 
 </android.support.constraint.ConstraintLayout>
+</layout>

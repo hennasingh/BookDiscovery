@@ -42,6 +42,8 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
     private static final String TAG = BookDataSource.class.getSimpleName();
     private String mQueryData;
 
+    private static final int FIRST_PAGE = 1;
+
     /**
      * The networkState and initialLoading variables
      * are for updating the UI when data is being fetched
@@ -82,7 +84,7 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
                     @Override
                     public void onResponse(Call<ApiBaseInfo> call, Response<ApiBaseInfo> response) {
                         if (response.isSuccessful()) {
-                            callback.onResult(response.body().getBookItemList(), null, 11);
+                            callback.onResult(response.body().getBookItemList(), null, FIRST_PAGE + 10);
                             initialLoading.postValue(NetworkState.LOADED);
                             networkState.postValue(NetworkState.LOADED);
                         } else {
