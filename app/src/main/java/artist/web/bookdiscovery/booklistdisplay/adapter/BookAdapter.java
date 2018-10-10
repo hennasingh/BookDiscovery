@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.databinding.BooksListItemBinding;
 import artist.web.bookdiscovery.model.BookItem;
+import artist.web.bookdiscovery.model.VolumeInfo;
 
 public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHolder> {
 
@@ -86,6 +87,44 @@ public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHold
         }
 
         void bind(BookItem bookData) {
+            VolumeInfo volumeInfo = bookData.getVolumeInfo();
+            if (volumeInfo != null) {
+
+                //getting Book Title
+                if (volumeInfo.getTitle() != null) {
+                    mListItemBinding.bookTitle.setText(volumeInfo.getTitle());
+                } else {
+                    mListItemBinding.bookTitle.setText(R.string.no_title);
+                }
+
+                //getting Authors
+                StringBuilder stringText = new StringBuilder();
+                if (volumeInfo.getAuthors() != null) {
+                    for (int i = 0; i < volumeInfo.getAuthors().size(); i++) {
+                        if (i == volumeInfo.getAuthors().size() - 1) {
+                            stringText.append(volumeInfo.getAuthors().get(i));
+                        } else {
+                            stringText.append(volumeInfo.getAuthors().get(i)).append("and ");
+                        }
+                    }
+                    mListItemBinding.bookAuthor.setText(stringText.toString());
+                } else {
+                    mListItemBinding.bookAuthor.setText(R.string.no_author);
+                }
+
+                //getting Publisher
+                if (volumeInfo.getPublisher() != null) {
+                    mListItemBinding.bookPublisher.setText(volumeInfo.getPublisher());
+                } else {
+                    mListItemBinding.bookPublisher.setText(R.string.no_publisher);
+                }
+
+                //getting Rating
+                if (volumeInfo.getAverageRating() != null) {
+
+                }
+
+            }
 
 
 

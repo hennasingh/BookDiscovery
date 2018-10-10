@@ -30,19 +30,17 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
-import java.util.concurrent.Executor;
-
 import artist.web.bookdiscovery.model.BookItem;
-import artist.web.bookdiscovery.network.NetworkState;
 import artist.web.bookdiscovery.repository.BookDataFactory;
 import artist.web.bookdiscovery.repository.BookDataSource;
 
 public class BookListViewModel extends ViewModel {
 
-    private Executor mExecutorThread;
     private BookDataFactory mBookDataFactory;
+    private String mBookTitle, mBookAuthor;
 
-    private LiveData<NetworkState> mNetworkStateLiveData;
+
+    private LiveData mNetworkStateLiveData;
     private LiveData<PagedList<BookItem>> mPagedListBookLiveData;
 
     public BookListViewModel() {
@@ -62,14 +60,22 @@ public class BookListViewModel extends ViewModel {
         mNetworkStateLiveData = Transformations.switchMap(mBookDataFactory.getBookDataSourceMutableLiveData(),
                 BookDataSource::getNetworkState);
 
-
     }
 
-    public LiveData<NetworkState> getNetworkState() {
+    public LiveData getNetworkState() {
         return mNetworkStateLiveData;
     }
 
     public LiveData<PagedList<BookItem>> getPagedListBookLiveData() {
         return mPagedListBookLiveData;
     }
+
+    public void setBookTitle(String bookTitle) {
+        mBookTitle = bookTitle;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        mBookAuthor = bookAuthor;
+    }
+
 }

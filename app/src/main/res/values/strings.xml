@@ -23,8 +23,8 @@
   -->
 
 <resources>
-    <string name="app_name">BookDiscovery</string>
-    <string name="book_heading">Book Discovery</string>
+    <string name="app_name">Book Lovers</string>
+    <string name="book_heading">Book Lovers Cafe</string>
     <string name="enter_book_name">Enter Book Name</string>
     <string name="enter_book_title">Enter Book Title</string>
 
@@ -38,4 +38,12 @@
     <string name="published_date">published on 21 Aug 2015</string>
     <string name="no_browser_msg">You dont have a browser installed to open the link</string>
     <string name="image_contentD">Image of the Book</string>
+    <string name="enter_author_name">Enter Author Name</string>
+    <string name="search_button">search button</string>
+    <string name="search">Search</string>
+    <string name="invalid_author">Its Optional, dont worry ;)</string>
+    <string name="invalid_title">Book Title is Required</string>
+    <string name="no_title">No Title Available</string>
+    <string name="no_author">No Author Found</string>
+    <string name="no_publisher">No Publisher Found</string>
 </resources>

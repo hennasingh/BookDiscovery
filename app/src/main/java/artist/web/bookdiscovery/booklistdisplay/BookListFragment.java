@@ -36,7 +36,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.booklistdisplay.adapter.BookAdapter;
 import artist.web.bookdiscovery.databinding.FragmentBooklistBinding;
@@ -48,6 +47,7 @@ public class BookListFragment extends Fragment {
     private BookListViewModel mBookListViewModel;
 
     public static BookListFragment newInstance() {
+
         return new BookListFragment();
     }
 

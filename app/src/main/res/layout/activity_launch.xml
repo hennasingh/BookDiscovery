@@ -22,60 +22,103 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   ~ SOFTWARE.
   -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/pile_books">
-
-    <TextView
-        android:id="@+id/book_heading"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/heading_marginT"
-        android:gravity="center_horizontal"
-        android:text="@string/book_heading"
-        android:textColor="@color/book_heading"
-        android:textSize="@dimen/heading_text_size"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:background="@drawable/pile_books">
 
-    <TextView
-        android:id="@+id/enter_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/book_heading"
-        android:layout_marginTop="120dp"
-        android:gravity="center"
-        android:text="@string/enter_book_name"
-        android:textColor="@color/enter_name"
-        android:textSize="@dimen/enter_text_size" />
+        <TextView
+            android:id="@+id/book_heading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/book_heading"
+            android:textColor="@color/book_heading"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/heading_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/enter_name"
-        android:layout_marginTop="@dimen/linear_marginT"
-        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/enter_name"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:minHeight="48dp"
+            android:gravity="center"
+            android:text="@string/enter_book_name"
+            android:textColor="@color/enter_name"
+            android:textSize="@dimen/enter_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_heading"/>
 
         <EditText
             android:id="@+id/book_title"
             android:layout_width="0dp"
-            android:layout_marginEnd="@dimen/edit_marginR"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/edit_marginL"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:hint="@string/enter_book_title"
             android:inputType="text"
-            android:layout_weight="4"
-            android:hint="@string/enter_book_title" />
+            app:layout_constraintEnd_toEndOf="@+id/enter_name"
+            app:layout_constraintTop_toBottomOf="@+id/enter_name"/>
+
+        <TextView
+            android:id="@+id/enter_author"
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="@string/enter_author_name"
+            android:textColor="@color/enter_name"
+            android:textSize="@dimen/enter_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_title"/>
+
+        <EditText
+            android:id="@+id/book_author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:hint="@string/enter_author_name"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/enter_author"
+            app:layout_constraintTop_toBottomOf="@+id/enter_author"/>
 
         <Button
             android:id="@+id/button_search"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/search_marginR"
-            android:layout_weight="1"
-            android:background="@drawable/search_icon" />
+            android:layout_marginBottom="120dp"
+            android:background="@color/book_activity_bg"
+            android:drawableEnd="@drawable/search_icon"
+            android:drawablePadding="3dp"
+            android:onClick="showSearchResults"
+            android:padding="3dp"
+            android:text="@string/search"
+            android:textColor="@color/book_heading"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    </LinearLayout>
-
-</RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>
