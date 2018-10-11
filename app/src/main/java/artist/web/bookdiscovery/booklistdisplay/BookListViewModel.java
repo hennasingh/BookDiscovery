@@ -30,14 +30,17 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
+import artist.web.bookdiscovery.helpers.AppExecutors;
 import artist.web.bookdiscovery.model.BookItem;
 import artist.web.bookdiscovery.repository.BookDataFactory;
 import artist.web.bookdiscovery.repository.BookDataSource;
+import artist.web.bookdiscovery.repository.WebRepository;
 
 public class BookListViewModel extends ViewModel {
 
     private BookDataFactory mBookDataFactory;
     private String mBookTitle, mBookAuthor;
+    private WebRepository mWebRepository;
 
 
     private LiveData mNetworkStateLiveData;
@@ -45,10 +48,13 @@ public class BookListViewModel extends ViewModel {
 
     public BookListViewModel() {
         mBookDataFactory = new BookDataFactory();
+        mWebRepository = new WebRepository();
         initializePaging();
     }
 
     private void initializePaging() {
+
+        setSearchQuery();
         PagedList.Config pagedListConfig =
                 new PagedList.Config.Builder()
                         .setEnablePlaceholders(true)
@@ -56,10 +62,24 @@ public class BookListViewModel extends ViewModel {
                         .setPageSize(10)
                         .build();
 
-        mPagedListBookLiveData = new LivePagedListBuilder<>(mBookDataFactory, pagedListConfig).build();
+        mPagedListBookLiveData = new LivePagedListBuilder<>(mBookDataFactory, pagedListConfig)
+                .setFetchExecutor(AppExecutors.networkIO())
+                .build();
         mNetworkStateLiveData = Transformations.switchMap(mBookDataFactory.getBookDataSourceMutableLiveData(),
                 BookDataSource::getNetworkState);
+    }
 
+    private void setSearchQuery() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        if(mBookAuthor!=null){
+
+           stringBuilder.append(mBookTitle).append("+").append("inauthor:").append(mBookAuthor);
+
+        }else{
+            stringBuilder.append(mBookTitle);
+        }
+        mWebRepository.setQuery(stringBuilder.toString());
     }
 
     public LiveData getNetworkState() {

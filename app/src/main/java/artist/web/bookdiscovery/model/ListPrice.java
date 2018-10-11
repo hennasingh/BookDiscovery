@@ -22,9 +22,31 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery.network;
+package artist.web.bookdiscovery.model;
 
-public class Utils {
+import com.google.gson.annotations.SerializedName;
 
-    public static final String BASE_URL = "https://www.googleapis.com/books/";
+public class ListPrice {
+
+    @SerializedName("amount")
+    private double mAmount;
+
+    @SerializedName("currencyCode")
+    private String mCurrencyCode;
+
+    public double getAmount() {
+        return mAmount;
+    }
+
+    public void setAmount(double amount) {
+        mAmount = amount;
+    }
+
+    public String getCurrencyCode() {
+        return mCurrencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        mCurrencyCode = currencyCode;
+    }
 }

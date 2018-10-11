@@ -58,7 +58,7 @@ public class VolumeInfo {
     private List<String> mCategories;
 
     @SerializedName("averageRating")
-    private double mAverageRating;
+    private Float mAverageRating;
 
     @SerializedName("ratingsCount")
     private int mRatingCount;
@@ -148,11 +148,11 @@ public class VolumeInfo {
         mCategories = categories;
     }
 
-    public double getAverageRating() {
+    public Float getAverageRating() {
         return mAverageRating;
     }
 
-    public void setAverageRating(double averageRating) {
+    public void setAverageRating(Float averageRating) {
         mAverageRating = averageRating;
     }
 

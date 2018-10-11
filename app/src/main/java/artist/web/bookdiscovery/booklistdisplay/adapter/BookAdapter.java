@@ -29,18 +29,24 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import com.squareup.picasso.Picasso;
 
 import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.databinding.BooksListItemBinding;
 import artist.web.bookdiscovery.model.BookItem;
+import artist.web.bookdiscovery.model.ImageLinks;
+import artist.web.bookdiscovery.model.SaleInfo;
 import artist.web.bookdiscovery.model.VolumeInfo;
 
 public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHolder> {
 
+    private static final String TAG =BookAdapter.class.getSimpleName();
 
-    public static final DiffUtil.ItemCallback<BookItem> DIFF_CALLBACK =
+    private static final DiffUtil.ItemCallback<BookItem> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<BookItem>() {
                 @Override
                 public boolean areItemsTheSame(BookItem oldItem, BookItem newItem) {
@@ -72,6 +78,8 @@ public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHold
     public void onBindViewHolder(@NonNull BookHolder holder, int position) {
         BookItem bookData = getItem(position);
         holder.bind(bookData);
+
+        Log.d(TAG, "Binding data");
 
     }
 
@@ -121,12 +129,42 @@ public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHold
 
                 //getting Rating
                 if (volumeInfo.getAverageRating() != null) {
+                    mListItemBinding.rating.setRating(volumeInfo.getAverageRating());
+                }else{
+                    mListItemBinding.rating.setRating(0);
+                }
 
+                //getting Image Thumbnail
+                if(volumeInfo.getImageLinks()!=null){
+                    ImageLinks imageLinks = volumeInfo.getImageLinks();
+                    if(imageLinks.getThumbnail()!=null) {
+
+                        Picasso.get().load(imageLinks.getThumbnail())
+                                .placeholder(R.drawable.image_not_found)
+                                .error(R.drawable.image_not_found)
+                                .into(mListItemBinding.imageBook);
+
+                    }else {
+                        Picasso.get().load(R.drawable.image_not_found)
+                                .error(R.drawable.image_not_found)
+                                .into(mListItemBinding.imageBook);
+                    }
+                }else{
+                    Picasso.get().load(R.drawable.image_not_found)
+                            .error(R.drawable.image_not_found)
+                            .into(mListItemBinding.imageBook);
+                }
+            }
+
+            SaleInfo saleInfo = bookData.getSaleInfo();
+            if(saleInfo!=null){
+                if(saleInfo.getListPrice()!=null){
+                    mListItemBinding.listPrice.setText(String.valueOf(saleInfo.getListPrice().getAmount()));
+                }else{
+                    mListItemBinding.listPrice.setText(R.string.no_price);
                 }
 
             }
-
-
 
         }
     }

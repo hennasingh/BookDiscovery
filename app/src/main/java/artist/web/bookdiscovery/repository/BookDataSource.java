@@ -29,7 +29,6 @@ import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import artist.web.bookdiscovery.EntryApplication;
 import artist.web.bookdiscovery.model.ApiBaseInfo;
 import artist.web.bookdiscovery.model.BookItem;
 import artist.web.bookdiscovery.network.NetworkState;
@@ -40,9 +39,14 @@ import retrofit2.Response;
 public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
 
     private static final String TAG = BookDataSource.class.getSimpleName();
-    private String mQueryData;
+
+    private WebRepository mWebRepository;
 
     private static final int FIRST_PAGE = 1;
+
+    BookDataSource(){
+        mWebRepository = new WebRepository();
+    }
 
     /**
      * The networkState and initialLoading variables
@@ -61,11 +65,6 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
         return initialLoading;
     }
 
-
-    public void setQueryData(String queryData) {
-        mQueryData = queryData;
-    }
-
     /*
      * Step 2: This method is responsible to load the data initially
      * when app screen is launched for the first time.
@@ -79,12 +78,14 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
         initialLoading.postValue(NetworkState.LOADING);
         networkState.postValue(NetworkState.LOADING);
 
-        EntryApplication.sApiManager.getBookApiResult(mQueryData, params.requestedLoadSize,
-                new Callback<ApiBaseInfo>() {
+        Log.d(TAG, "loadsize on LoadInitial "+ params.requestedLoadSize);
+
+        mWebRepository.getBookApiResult(params.requestedLoadSize,
+                 new Callback<ApiBaseInfo>() {
                     @Override
                     public void onResponse(Call<ApiBaseInfo> call, Response<ApiBaseInfo> response) {
                         if (response.isSuccessful()) {
-                            callback.onResult(response.body().getBookItemList(), null, FIRST_PAGE + 10);
+                            callback.onResult(response.body().getBookItemList(), null, FIRST_PAGE );
                             initialLoading.postValue(NetworkState.LOADED);
                             networkState.postValue(NetworkState.LOADED);
                         } else {
@@ -123,11 +124,11 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
     public void loadAfter(@NonNull final LoadParams<Integer> params,
                           @NonNull final LoadCallback<Integer, BookItem> callback) {
 
-        Log.i(TAG, "Loading: " + params.key + " Count: " + params.requestedLoadSize);
+        Log.d(TAG, "Loading: " + params.key + " Count: " + params.requestedLoadSize);
 
         networkState.postValue(NetworkState.LOADING);
 
-        EntryApplication.sApiManager.getBookApiResult(mQueryData, params.key,
+        mWebRepository.getBookApiResult(params.key,
                 new Callback<ApiBaseInfo>() {
                     @Override
                     public void onResponse(Call<ApiBaseInfo> call, Response<ApiBaseInfo> response) {

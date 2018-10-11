@@ -65,6 +65,8 @@ public class LaunchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if (mTitle.length() == 0) {
                     mLaunchActivityBinding.bookTitle.setError(getString(R.string.invalid_title));
+                }else{
+                    mViewModel.setBookTitle(mTitle);
                 }
 
             }
@@ -84,8 +86,8 @@ public class LaunchActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (mAuthor.length() == 0) {
-                    mLaunchActivityBinding.bookAuthor.setText(R.string.invalid_author);
+                if(mAuthor.length()!=0){
+                    mViewModel.setBookAuthor(mAuthor);
                 }
             }
         });
@@ -94,15 +96,10 @@ public class LaunchActivity extends AppCompatActivity {
 
     public void showSearchResults(View view) {
 
-        setValues();
         Intent intent = BookListActivity.newIntent(this);
         startActivity(intent);
 
     }
 
-    private void setValues() {
-        mViewModel.setBookTitle(mTitle);
-        mViewModel.setBookAuthor(mAuthor);
-    }
 
 }

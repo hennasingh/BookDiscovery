@@ -46,4 +46,5 @@
     <string name="no_title">No Title Available</string>
     <string name="no_author">No Author Found</string>
     <string name="no_publisher">No Publisher Found</string>
+    <string name="no_price">Price not available</string>
 </resources>

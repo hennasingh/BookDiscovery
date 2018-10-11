@@ -22,40 +22,10 @@
  * SOFTWARE.
  */
 
-package artist.web.bookdiscovery.network;
+package artist.web.bookdiscovery.helpers;
 
-import artist.web.bookdiscovery.helpers.Utils;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+public class Utils {
 
-public class ApiManager {
-
-    private static BooksApi sBooksApi;
-    private static ApiManager sApiManager;
-
-    private ApiManager() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Utils.BASE_URL)
-                .client(new OkHttpClient.Builder().addInterceptor(interceptor).build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        sBooksApi = retrofit.create(BooksApi.class);
-    }
-
-    public static ApiManager getInstance() {
-        if (sApiManager == null) {
-            sApiManager = new ApiManager();
-        }
-        return sApiManager;
-    }
-
-    public static BooksApi getBooksApi() {
-        return sBooksApi;
-    }
-
+    public static final String BASE_URL = "https://www.googleapis.com/books/";
+    public static final int EXECUTOR_THREAD_POOL_OFFSET = 5;
 }

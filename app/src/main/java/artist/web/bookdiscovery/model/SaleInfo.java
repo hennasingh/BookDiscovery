@@ -40,5 +40,48 @@ public class SaleInfo {
 
     @SerializedName("buyLink")
     private String mBuyLink;
+
+    @SerializedName("listPrice")
+    private ListPrice mListPrice;
+
+    public String getCountry() {
+        return mCountry;
+    }
+
+    public void setCountry(String country) {
+        mCountry = country;
+    }
+
+    public String getSaleability() {
+        return mSaleability;
+    }
+
+    public void setSaleability(String saleability) {
+        mSaleability = saleability;
+    }
+
+    public Boolean getEbook() {
+        return mIsEbook;
+    }
+
+    public void setEbook(Boolean ebook) {
+        mIsEbook = ebook;
+    }
+
+    public String getBuyLink() {
+        return mBuyLink;
+    }
+
+    public void setBuyLink(String buyLink) {
+        mBuyLink = buyLink;
+    }
+
+    public ListPrice getListPrice() {
+        return mListPrice;
+    }
+
+    public void setListPrice(ListPrice listPrice) {
+        mListPrice = listPrice;
+    }
 }
 
