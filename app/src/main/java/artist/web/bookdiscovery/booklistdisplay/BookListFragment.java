@@ -46,19 +46,33 @@ import artist.web.bookdiscovery.model.BookItem;
 public class BookListFragment extends Fragment {
 
     private static final String TAG = BookListFragment.class.getSimpleName();
+    private static final String ARG_TITLE = "arg_title";
+    private static final String ARG_AUTHOR = "arg_author";
 
     private BookAdapter mPageListAdapter;
     private BookListViewModel mBookListViewModel;
 
-    public static BookListFragment newInstance() {
+    public static BookListFragment newInstance(String title, String author) {
 
-        return new BookListFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_TITLE,title);
+        args.putString(ARG_AUTHOR, author);
+
+        BookListFragment fragment = new BookListFragment();
+        fragment.setArguments(args);
+        return fragment;
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBookListViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
+        String title = getArguments().getString(ARG_TITLE);
+        String author = getArguments().getString(ARG_AUTHOR);
+        Log.d(TAG, "Title and author are  "+ title+ ", " +author);
+        mBookListViewModel.setBookTitle(title);
+        mBookListViewModel.setBookAuthor(author);
         Log.d(TAG, "In onCreate");
 
     }

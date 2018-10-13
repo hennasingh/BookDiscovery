@@ -29,6 +29,7 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.util.Log;
 
 import artist.web.bookdiscovery.helpers.AppExecutors;
 import artist.web.bookdiscovery.model.BookItem;
@@ -37,6 +38,8 @@ import artist.web.bookdiscovery.repository.BookDataSource;
 import artist.web.bookdiscovery.repository.WebRepository;
 
 public class BookListViewModel extends ViewModel {
+
+    private static final String TAG = BookListViewModel.class.getSimpleName();
 
     private BookDataFactory mBookDataFactory;
     private String mBookTitle, mBookAuthor;
@@ -54,6 +57,7 @@ public class BookListViewModel extends ViewModel {
 
     private void initializePaging() {
 
+        Log.d(TAG, "in initialize Paging");
         setSearchQuery();
         PagedList.Config pagedListConfig =
                 new PagedList.Config.Builder()
@@ -72,6 +76,7 @@ public class BookListViewModel extends ViewModel {
     private void setSearchQuery() {
 
         StringBuilder stringBuilder = new StringBuilder();
+        Log.d(TAG, "Author and Title are " + mBookTitle+ ","+mBookAuthor);
         if(mBookAuthor!=null){
 
            stringBuilder.append(mBookTitle).append("+").append("inauthor:").append(mBookAuthor);
@@ -80,6 +85,7 @@ public class BookListViewModel extends ViewModel {
             stringBuilder.append(mBookTitle);
         }
         mWebRepository.setQuery(stringBuilder.toString());
+        Log.d(TAG, "setting query "+ stringBuilder.toString());
     }
 
     public LiveData getNetworkState() {

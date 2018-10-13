@@ -32,6 +32,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
 import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.booklistdisplay.BookListActivity;
 import artist.web.bookdiscovery.booklistdisplay.BookListViewModel;
@@ -65,29 +66,6 @@ public class LaunchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if (mTitle.length() == 0) {
                     mLaunchActivityBinding.bookTitle.setError(getString(R.string.invalid_title));
-                }else{
-                    mViewModel.setBookTitle(mTitle);
-                }
-
-            }
-        });
-
-        mLaunchActivityBinding.bookAuthor.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                mAuthor = charSequence.toString();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(mAuthor.length()!=0){
-                    mViewModel.setBookAuthor(mAuthor);
                 }
             }
         });
@@ -96,9 +74,17 @@ public class LaunchActivity extends AppCompatActivity {
 
     public void showSearchResults(View view) {
 
-        Intent intent = BookListActivity.newIntent(this);
-        startActivity(intent);
+        if(validateInput()) {
+            Intent intent = BookListActivity.newIntent(this,mTitle,mAuthor);
+            startActivity(intent);
+        }
+    }
 
+    private boolean validateInput() {
+        mTitle = mLaunchActivityBinding.bookTitle.getText().toString();
+        mAuthor = mLaunchActivityBinding.bookAuthor.getText().toString();
+
+        return mTitle.length() != 0 && mAuthor.length() != 0 || mTitle.length() != 0;
     }
 
 

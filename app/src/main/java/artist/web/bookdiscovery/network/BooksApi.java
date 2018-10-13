@@ -33,6 +33,6 @@ public interface BooksApi {
 
     @GET("v1/volumes")
     Call<ApiBaseInfo> getBookApiResult(@Query("q") String q,
-                                       @Query("startIndex") int startIndex);
+                                       @Query("maxResult") int maxResult);
 
 }

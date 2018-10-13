@@ -21,10 +21,10 @@ public class WebRepository {
         mQuery = query;
     }
 
-    public void getBookApiResult( int startIndex, Callback<ApiBaseInfo> callback) {
+    public void getBookApiResult( int maxResult, Callback<ApiBaseInfo> callback) {
 
         Log.d(TAG,"Query received"+mQuery);
-        Call<ApiBaseInfo> resultCall = ApiManager.getBooksApi().getBookApiResult(mQuery, startIndex);
+        Call<ApiBaseInfo> resultCall = ApiManager.getBooksApi().getBookApiResult(mQuery, maxResult);
          resultCall.enqueue(callback);
     }
 

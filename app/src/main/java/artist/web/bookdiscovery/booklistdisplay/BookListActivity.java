@@ -36,15 +36,22 @@ import artist.web.bookdiscovery.SingleFragmentActivity;
 
 public class BookListActivity extends SingleFragmentActivity {
 
+    private static final String TITLE = "book_title";
+    private static final String AUTHOR = "book_author";
 
-    public static Intent newIntent(Context context) {
-        return new Intent(context, BookListActivity.class);
-
+    public static Intent newIntent(Context context, String title, String author) {
+        Intent intent = new  Intent(context, BookListActivity.class);
+        intent.putExtra(TITLE,title);
+        intent.putExtra(AUTHOR,author);
+        return intent;
     }
 
     @Override
     protected Fragment createFragment() {
-        return BookListFragment.newInstance();
+        String title = getIntent().getStringExtra(TITLE);
+        String author = getIntent().getStringExtra(AUTHOR);
+
+        return BookListFragment.newInstance(title,author);
     }
 
 }
