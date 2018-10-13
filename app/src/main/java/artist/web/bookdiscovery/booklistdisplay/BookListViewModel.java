@@ -50,8 +50,9 @@ public class BookListViewModel extends ViewModel {
     private LiveData<PagedList<BookItem>> mPagedListBookLiveData;
 
     public BookListViewModel() {
-        mBookDataFactory = new BookDataFactory();
+
         mWebRepository = new WebRepository();
+        mBookDataFactory = new BookDataFactory(mWebRepository);
         initializePaging();
     }
 

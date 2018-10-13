@@ -44,8 +44,8 @@ public class BookDataSource extends PageKeyedDataSource<Integer, BookItem> {
 
     private static final int FIRST_PAGE = 1;
 
-    BookDataSource(){
-        mWebRepository = new WebRepository();
+    BookDataSource(WebRepository webRepository){
+        mWebRepository = webRepository;
     }
 
     /**

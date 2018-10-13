@@ -31,11 +31,18 @@ import artist.web.bookdiscovery.model.BookItem;
 
 public class BookDataFactory extends DataSource.Factory<Integer, BookItem> {
 
-    private MutableLiveData<BookDataSource> mBookDataSourceMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<BookDataSource> mBookDataSourceMutableLiveData;
+    private WebRepository mWebRepository;
+
+    public BookDataFactory(WebRepository webRepository){
+
+        mWebRepository = webRepository;
+        mBookDataSourceMutableLiveData = new MutableLiveData<>();
+    }
 
     @Override
     public DataSource<Integer, BookItem> create() {
-        BookDataSource mBookDataSource = new BookDataSource();
+        BookDataSource mBookDataSource = new BookDataSource(mWebRepository);
         mBookDataSourceMutableLiveData.postValue(mBookDataSource);
         return mBookDataSource;
     }
