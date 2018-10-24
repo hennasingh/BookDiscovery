@@ -45,7 +45,8 @@ public class BookWareHouse {
 
     private String author;
 
-    public BookWareHouse(@NonNull String id, String title, String publishedDate, String language, String author) {
+    public BookWareHouse(@NonNull String id, String title, String publishedDate,
+                         String language, String author) {
         this.id = id;
         this.title = title;
         this.publishedDate = publishedDate;

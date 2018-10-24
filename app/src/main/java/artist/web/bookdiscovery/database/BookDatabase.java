@@ -36,19 +36,22 @@ public abstract class BookDatabase extends RoomDatabase {
     private static final String DB_NAME = "booklist.db";
     private static volatile BookDatabase sBookDatabase;
 
-    static synchronized BookDatabase getInstance(Context context) {
+    static synchronized BookDatabase getInstance(Context context, Boolean inMemory) {
         if (sBookDatabase == null) {
-            sBookDatabase = createInstance(context);
+            sBookDatabase = createInstance(context, inMemory);
         }
         return sBookDatabase;
     }
 
-    private static BookDatabase createInstance(Context context) {
-        return Room.databaseBuilder(
-                context.getApplicationContext(),
-                BookDatabase.class,
-                DB_NAME
-        ).build();
+    private static BookDatabase createInstance(Context context, Boolean inMemory) {
+        RoomDatabase.Builder<BookDatabase> database;
+
+        if(inMemory){
+            database = Room.inMemoryDatabaseBuilder(context.getApplicationContext(),BookDatabase.class);
+        }else{
+            database = Room.databaseBuilder(context.getApplicationContext(),BookDatabase.class,DB_NAME);
+        }
+        return database.fallbackToDestructiveMigration().build();
     }
 
 
