@@ -39,7 +39,6 @@ import artist.web.bookdiscovery.R;
 import artist.web.bookdiscovery.databinding.BooksListItemBinding;
 import artist.web.bookdiscovery.model.BookItem;
 import artist.web.bookdiscovery.model.ImageLinks;
-import artist.web.bookdiscovery.model.SaleInfo;
 import artist.web.bookdiscovery.model.VolumeInfo;
 
 public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHolder> {
@@ -127,12 +126,6 @@ public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHold
                     mListItemBinding.bookPublisher.setText(R.string.no_publisher);
                 }
 
-                //getting Rating
-                if (volumeInfo.getAverageRating() != null) {
-                    mListItemBinding.rating.setRating(volumeInfo.getAverageRating());
-                }else{
-                    mListItemBinding.rating.setRating(0);
-                }
 
                 //getting Image Thumbnail
                 if(volumeInfo.getImageLinks()!=null){
@@ -154,16 +147,6 @@ public class BookAdapter extends PagedListAdapter<BookItem, BookAdapter.BookHold
                             .error(R.drawable.image_not_found)
                             .into(mListItemBinding.imageBook);
                 }
-            }
-
-            SaleInfo saleInfo = bookData.getSaleInfo();
-            if(saleInfo!=null){
-                if(saleInfo.getListPrice()!=null){
-                    mListItemBinding.listPrice.setText(String.valueOf(saleInfo.getListPrice().getAmount()));
-                }else{
-                    mListItemBinding.listPrice.setText(R.string.no_price);
-                }
-
             }
 
         }
