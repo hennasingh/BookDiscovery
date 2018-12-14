@@ -26,106 +26,91 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@drawable/pile_books">
 
         <TextView
             android:id="@+id/book_heading"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/book_heading"
             android:textColor="@color/book_heading"
             android:gravity="center_horizontal"
             android:textSize="@dimen/heading_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="100dp"
+            android:background="@color/colorBG"
+            android:orientation="vertical">
 
         <TextView
             android:id="@+id/enter_name"
             style="?android:listSeparatorTextViewStyle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
             android:minHeight="48dp"
             android:gravity="center"
             android:text="@string/enter_book_name"
-            android:textColor="@color/enter_name"
-            android:textSize="@dimen/enter_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/book_heading"/>
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorBG"
+            android:textSize="@dimen/enter_text_size"/>
 
         <artist.web.bookdiscovery.EditTextCustomView
             android:id="@+id/book_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:hint="@string/enter_book_title"
             android:inputType="text"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            app:layout_constraintEnd_toEndOf="@+id/enter_name"
-            app:layout_constraintStart_toStartOf="@+id/enter_name"
-            app:layout_constraintTop_toBottomOf="@+id/enter_name"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <TextView
             android:id="@+id/enter_author"
             style="?android:listSeparatorTextViewStyle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+           android:layout_marginTop="8dp"
             android:gravity="center"
             android:minHeight="48dp"
             android:text="@string/enter_author_name"
-            android:textColor="@color/enter_name"
-            android:textSize="@dimen/enter_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/book_title"/>
+            android:textColor="@color/colorBG"
+            android:background="@color/colorPrimary"
+            android:textSize="@dimen/enter_text_size"/>
 
         <artist.web.bookdiscovery.EditTextCustomView
             android:id="@+id/book_author"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:hint="@string/enter_author_name"
             android:inputType="text"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            app:layout_constraintEnd_toEndOf="@+id/enter_author"
-            app:layout_constraintStart_toStartOf="@+id/enter_author"
-            app:layout_constraintTop_toBottomOf="@+id/enter_author"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <Button
             android:id="@+id/button_search"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
-            android:background="@color/book_activity_bg"
+            android:background="@color/colorPrimary"
             android:drawableEnd="@drawable/search_icon"
-            android:drawablePadding="3dp"
             android:onClick="showSearchResults"
-            android:padding="3dp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
             android:text="@string/search"
-            android:textColor="@color/book_heading"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:textColor="@color/colorBG"
+            android:textStyle="bold"/>
+        </LinearLayout>
 
-
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>
