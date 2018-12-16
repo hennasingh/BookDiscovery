@@ -40,7 +40,6 @@ import artist.web.bookdiscovery.databinding.ActivityLaunchBinding;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private BookListViewModel mViewModel;
     private ActivityLaunchBinding mLaunchActivityBinding;
     private String mTitle, mAuthor;
 
@@ -49,7 +48,6 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mLaunchActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 
-        mViewModel = ViewModelProviders.of(this).get(BookListViewModel.class);
         mLaunchActivityBinding.bookTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
