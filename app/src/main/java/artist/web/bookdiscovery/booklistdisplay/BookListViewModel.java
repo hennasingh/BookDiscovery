@@ -49,7 +49,7 @@ public class BookListViewModel extends ViewModel {
     private LiveData mNetworkStateLiveData;
     private LiveData<PagedList<BookItem>> mPagedListBookLiveData;
 
-    public BookListViewModel() {
+    public BookListViewModel(String author, String title) {
 
         mWebRepository = new WebRepository();
         mBookDataFactory = new BookDataFactory(mWebRepository);
